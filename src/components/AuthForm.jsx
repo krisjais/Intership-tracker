@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, User, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -78,11 +79,18 @@ export default function AuthForm() {
               <Lock strokeWidth={2} className="h-5 w-5 text-neutral-400 group-focus-within:text-violet-500 transition-colors" />
             </div>
             <input 
-              type="password" 
+              type={showPassword ? "text" : "password"}
               required 
-              className="w-full pl-11 pr-4 py-3 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all duration-200" 
+              className="w-full pl-11 pr-11 py-3 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition-all duration-200" 
               placeholder="••••••••"
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-4 flex items-center text-neutral-400 hover:text-violet-500 transition-colors"
+            >
+              {showPassword ? <EyeOff strokeWidth={2} className="h-5 w-5" /> : <Eye strokeWidth={2} className="h-5 w-5" />}
+            </button>
           </div>
         </div>
 
